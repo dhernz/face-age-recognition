@@ -16,6 +16,9 @@
       <v-btn @click.stop="miniVariant = !miniVariant" icon>
         <v-icon v-html="miniVariant ? 'chevron_right' : 'chevron_left'" />
       </v-btn>
+        <div>
+            <img src="../assets/images/logo.png" />
+        </div>
       <v-toolbar-title v-html="title" />
     </v-app-bar>
     <v-content>
@@ -27,7 +30,7 @@
           color="red"
           indeterminate
         >
-          Loading 7MB models.
+          <!-- Loading 7MB models. -->
           <br>
           Please be patient...
         </v-progress-circular>
@@ -37,7 +40,7 @@
     <v-footer :fixed="fixed" app>
       <v-flex class="text-xs-right">
         <a href="http://gjovanov.com/" style="color: white">
-          <span>gjovanov - &copy; 2019</span>
+          <span>Doris Hernandez  - &copy; 2019</span>
         </a>
         &nbsp;
       </v-flex>
@@ -61,7 +64,7 @@ export default {
       miniVariant: true,
       right: true,
       rightDrawer: false,
-      title: 'face&reg; - Realtime Face Recognition'
+      title: 'Realtime Face Recognition'
     }
   },
   computed: {
