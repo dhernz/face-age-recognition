@@ -46,6 +46,10 @@
               <v-icon>insert_emoticon</v-icon>
               <span>Emotion</span>
             </v-btn>
+            <v-btn>
+              <v-icon>gender-male-female</v-icon>
+              <span>Age</span>
+            </v-btn>
           </v-btn-toggle>
         </v-card-actions>
         <v-slider v-model="fps"
@@ -102,7 +106,7 @@ export default {
       duration: 0,
       isProgressActive: true,
       recognition: '',
-      withOptions: [0, 1, 2, 3]
+      withOptions: [0, 1, 2, 3, 4]
     }
   },
 
@@ -151,7 +155,8 @@ export default {
           detectionsEnabled: self.withOptions.find(o => o === 0) === 0,
           landmarksEnabled: self.withOptions.find(o => o === 1) === 1,
           descriptorsEnabled: self.withOptions.find(o => o === 2) === 2,
-          expressionsEnabled: self.withOptions.find(o => o === 3) === 3
+          expressionsEnabled: self.withOptions.find(o => o === 3) === 3,
+          ageAndGenderEnable: self.withOptions.find(o => o === 4) === 4
         }
         const detections = await self.$store.dispatch('face/getFaceDetections', { canvas: canvasDiv, options })
         if (detections.length) {

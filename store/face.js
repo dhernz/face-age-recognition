@@ -12,7 +12,7 @@ export const state = () => ({
     scoreThreshold: 0.5,
     inputSize: 320,
     boxColor: 'blue',
-    textColor: 'black',
+    textColor: 'white',
     lineWidth: 1,
     fontSize: 16,
     fontStyle: 'Verdana'
@@ -113,7 +113,9 @@ export const actions = {
     if (options && options.descriptorsEnabled) {
       detections = detections.withFaceDescriptors()
     }
-    detections = detections.withAgeAndGender()
+    if (options && options.ageAndGenderEnable) {
+      detections = detections.withAgeAndGender()
+    }
     detections = await detections
     return detections
   },
@@ -126,7 +128,6 @@ export const actions = {
   },
 
   draw ({ commit, state }, { canvasDiv, canvasCtx, detection, options }) {
-    console.log(detection)
     let emotions = ''
     // filter only emontions above confidence treshold and exclude 'neutral'
     if (options.expressionsEnabled && detection.expressions) {
@@ -154,18 +155,19 @@ export const actions = {
       canvasCtx.lineWidth = state.detections.lineWidth
       canvasCtx.strokeRect(box.x, box.y, box.width, box.height)
     }
+    const padText = 2 + state.detections.lineWidth
+    canvasCtx.fillStyle = state.detections.textColor
+    canvasCtx.font = state.detections.fontSize + 'px ' + state.detections.fontStyle
     if (text && detection && box) {
       // draw text
-      const padText = 2 + state.detections.lineWidth
-      canvasCtx.fillStyle = state.detections.textColor
-      canvasCtx.font = state.detections.fontSize + 'px ' + state.detections.fontStyle
       canvasCtx.fillText(text, box.x + padText, box.y + box.height + padText + (state.detections.fontSize))
-      canvasCtx.fillText(ageText, box.x + padText, box.y + box.height + padText + (state.detections.fontSize * 2))
-      canvasCtx.fillText(genderText, box.x + padText, box.y + box.height + padText + (state.detections.fontSize * 3))
     }
-
     if (options.landmarksEnabled && detection.landmarks) {
       faceapi.draw.drawFaceLandmarks(canvasDiv, detection.landmarks, { lineWidth: state.landmarks.lineWidth, drawLines: state.landmarks.drawLines })
+    }
+    if (detection.age && options.ageAndGenderEnable) {
+      canvasCtx.fillText(ageText, box.x + padText, box.y + box.height + padText + (state.detections.fontSize * 2))
+      canvasCtx.fillText(genderText, box.x + padText, box.y + box.height + padText + (state.detections.fontSize * 3))
     }
   },
 
