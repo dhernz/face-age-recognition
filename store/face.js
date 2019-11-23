@@ -56,7 +56,9 @@ export const actions = {
         faceapi.loadFaceRecognitionModel('/data/models'),
         faceapi.loadFaceLandmarkModel('/data/models'),
         faceapi.loadTinyFaceDetectorModel('/data/models'),
-        faceapi.loadFaceExpressionModel('/data/models')
+        faceapi.loadFaceExpressionModel('/data/models'),
+        faceapi.loadAgeGenderModel('/data/models')
+
       ])
         .then(() => {
           commit('load')
@@ -111,6 +113,7 @@ export const actions = {
     if (options && options.descriptorsEnabled) {
       detections = detections.withFaceDescriptors()
     }
+    detections = detections.withAgeAndGender()
     detections = await detections
     return detections
   },
@@ -123,6 +126,7 @@ export const actions = {
   },
 
   draw ({ commit, state }, { canvasDiv, canvasCtx, detection, options }) {
+    console.log(detection)
     let emotions = ''
     // filter only emontions above confidence treshold and exclude 'neutral'
     if (options.expressionsEnabled && detection.expressions) {
