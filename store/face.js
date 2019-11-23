@@ -12,10 +12,10 @@ export const state = () => ({
     scoreThreshold: 0.5,
     inputSize: 320,
     boxColor: 'blue',
-    textColor: 'red',
+    textColor: 'black',
     lineWidth: 1,
-    fontSize: 20,
-    fontStyle: 'Georgia'
+    fontSize: 16,
+    fontStyle: 'Verdana'
   },
   expressions: {
     minConfidence: 0.2
@@ -145,7 +145,7 @@ export const actions = {
     }
 
     const text = `${name} ${emotions ? (name ? ' is ' : '') : ''}${emotions}`
-    const ageText = `age: ${detection.age}`
+    const ageText = `age: ${parseInt(detection.age)}`
     const genderText = `gender: ${detection.gender}`
     const box = detection.box || detection.detection.box
     if (options.detectionsEnabled && box) {
