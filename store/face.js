@@ -144,7 +144,9 @@ export const actions = {
       name = detection.recognition.toString(state.descriptors.withDistance)
     }
 
-    const text = `${name}${emotions ? (name ? ' is ' : '') : ''}${emotions}`
+    const text = `${name} ${emotions ? (name ? ' is ' : '') : ''}${emotions}`
+    const ageText = `age: ${detection.age}`
+    const genderText = `gender: ${detection.gender}`
     const box = detection.box || detection.detection.box
     if (options.detectionsEnabled && box) {
       // draw box
@@ -157,7 +159,9 @@ export const actions = {
       const padText = 2 + state.detections.lineWidth
       canvasCtx.fillStyle = state.detections.textColor
       canvasCtx.font = state.detections.fontSize + 'px ' + state.detections.fontStyle
-      canvasCtx.fillText(text, box.x + padText, box.y + box.height + padText + (state.detections.fontSize * 0.6))
+      canvasCtx.fillText(text, box.x + padText, box.y + box.height + padText + (state.detections.fontSize))
+      canvasCtx.fillText(ageText, box.x + padText, box.y + box.height + padText + (state.detections.fontSize * 2))
+      canvasCtx.fillText(genderText, box.x + padText, box.y + box.height + padText + (state.detections.fontSize * 3))
     }
 
     if (options.landmarksEnabled && detection.landmarks) {
