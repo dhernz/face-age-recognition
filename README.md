@@ -1,16 +1,4 @@
-# face®
-
-[![Facer Demo](https://img.youtube.com/vi/rHUQyRe8JyQ/0.jpg)](https://www.youtube.com/watch?v=rHUQyRe8JyQ)
-
- Realtime Face Recognition app using:
- - [face-api.js](https://github.com/justadudewhohacks/face-api.js)
- - [TensorflowJS](https://github.com/tensorflow/tfjs)
- - [VueJS](https://github.com/vuejs/vue)
- - [NuxtJS](https://github.com/nuxt/nuxt.js/)
- - [VuetifyJS](https://github.com/vuetifyjs/vuetify)
- - [ExpressJS](https://github.com/expressjs/expressjs.com)
- - [Docker](https://github.com/docker)
-
+# Women Do Tech Workshop - Face Recognition Algorithm 
 
 # Install
 Run `npm i` in the root folder
